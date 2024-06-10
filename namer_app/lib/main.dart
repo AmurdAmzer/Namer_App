@@ -66,7 +66,10 @@ class BigCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context); // what does this do?
+
     return Card(
+      color: theme.colorScheme.primary, //why add a comma and not a semi-colon?
       child: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Text(pair.asLowerCase),
