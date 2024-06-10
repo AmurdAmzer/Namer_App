@@ -40,17 +40,21 @@ class MyHomePage extends StatelessWidget {
     var pair = appState.current; // why add this?
 
     return Scaffold(
-      body: Column(
-        children: [
-          Text('A random AWESOME idea:'),
-          BigCard(pair: pair), // what does this do?
-          ElevatedButton(
-            onPressed: () {
-              appState.getNext();
-            },
-            child: Text('Next'),
-          ),
-        ],
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment
+              .center, //for centering the contents in a column.
+          children: [
+            BigCard(pair: pair), // what does this do?
+            SizedBox(height: 10), // for creating visual gaps between contents.
+            ElevatedButton(
+              onPressed: () {
+                appState.getNext();
+              },
+              child: Text('Next'),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -67,12 +71,20 @@ class BigCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context); // what does this do?
+    final style = theme.textTheme.displayMedium!.copyWith(
+      color: theme.colorScheme.onPrimary,
+    ); // why add this?
 
     return Card(
-      color: theme.colorScheme.primary, //why add a comma and not a semi-colon?
+      color: theme.colorScheme
+          .primary, //why add a comma and not a semi-colon? Answer: Because it is a parameter?
       child: Padding(
         padding: const EdgeInsets.all(20.0),
-        child: Text(pair.asLowerCase),
+        child: Text(
+          pair.asLowerCase,
+          style: style,
+          semanticsLabel: "${pair.first} ${pair.second}",
+        ),
       ),
     );
   }
@@ -81,4 +93,4 @@ class BigCard extends StatelessWidget {
 
 // What does refactor do and why use it?
 // Refactor changed this (Text(pair.asLowerCase)) to BigCard(pair:pair).
-// 
+// ! = bang operator
