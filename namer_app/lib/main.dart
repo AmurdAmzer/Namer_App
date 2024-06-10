@@ -37,15 +37,16 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var appState = context.watch<MyAppState>();
+    var pair = appState.current; // why add this?
 
     return Scaffold(
       body: Column(
         children: [
-          Text('A random idea:'),
-          Text(appState.current.asLowerCase),
+          Text('A random AWESOME idea:'),
+          BigCard(pair: pair), // what does this do?
           ElevatedButton(
             onPressed: () {
-              print('button pressed!');
+              appState.getNext();
             },
             child: Text('Next'),
           ),
@@ -54,3 +55,27 @@ class MyHomePage extends StatelessWidget {
     );
   }
 }
+
+class BigCard extends StatelessWidget {
+  const BigCard({
+    super.key,
+    required this.pair,
+  });
+
+  final WordPair pair;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Text(pair.asLowerCase),
+      ),
+    );
+  }
+}
+
+
+// What does refactor do and why use it?
+// Refactor changed this (Text(pair.asLowerCase)) to BigCard(pair:pair).
+// 
