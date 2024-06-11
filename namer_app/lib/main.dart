@@ -32,7 +32,11 @@ class MyAppState extends ChangeNotifier {
     notifyListeners();
   }
 
-  var favorites = <WordPair>[];
+  var favorites =
+      <WordPair>[]; // according to the explanations, this is a property. why?
+// Found answer. favorites is declared to hold the list of wordPair.
+// we use <> to soround wordpair because we want the list to hold only wordpair objects.
+//The syntax <WordPair>[] initializes an empty list that can only contain WordPair objects.
 
   void toggleFavorite() {
     if (favorites.contains(current)) {
